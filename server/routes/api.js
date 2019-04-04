@@ -9,6 +9,10 @@ router.route('/recipes')
   .get(recipeController.getRecipes)
   .post(recipeController.createRecipe);
 
+router.route('/recipes/:id')
+  .get(recipeController.getRecipe)
+  .put(recipeController.updateRecipe);
+
 
 router.get('/tags', recipeController.listAllTags);
 

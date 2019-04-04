@@ -54,14 +54,14 @@ export class TagSelectorComponent implements AfterViewInit, OnInit, ControlValue
       .subscribe(value => {
         // console.log(value);
         this.suggestions = this.allTags.filter(tag => {
-          return value && tag.indexOf(value) === 0 && this.selectedTags.indexOf(tag) === -1;
+          return value && tag.indexOf(value) === 0 && (this.selector.value ? this.selector.value.indexOf(tag) === -1 : true);
         });
       });
   }
 
   writeValue(value: any): void {
     if (value !== undefined) {
-      this.selectedTags = value;
+      // this.selectedTags = value;
       this.selector.value = value;
     }
   }

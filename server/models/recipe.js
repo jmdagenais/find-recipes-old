@@ -5,12 +5,23 @@ let recipeModel = new mongoose.Schema({
     type: String,
     required: true
   },
-  description: {
+  preparation: {
     type: String,
     required: true
   },
+  ingredients: {
+    type: String,
+    required: true
+  },
+  nbPortions: Number,
+  prepTime: Number,
+  cookTime: Number,
+  extraTime: {
+    time: Number,
+    name: String
+  },
   tags: [String],
-  ingredients: [String]
+  image: String
 });
 
 exports.module = mongoose.model('Recipe', recipeModel);

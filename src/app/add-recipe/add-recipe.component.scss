@@ -2,3 +2,23 @@
   margin-top: 5px;
   margin-right: 5px;
 }
+
+#recipePic {
+  width: 300px;
+}
+
+.time-input {
+  &:not(:last-child) {
+    margin-bottom: 3px;
+  }
+
+  label {
+    width: 10em;
+  }
+
+  input {
+    width: 5em;
+    margin: 0 1em 0 1em;
+  }
+
+}

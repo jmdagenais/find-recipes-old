@@ -22,7 +22,7 @@
   </div>
   <ul class="list-group">
     <li class="list-group-item" *ngFor="let recipe of recipes">
-      <p><strong>{{recipe.name}}</strong></p>
+      <p><strong><a [routerLink]="['/recipes', recipe._id]">{{recipe.name}}</a></strong></p>
       <h6><span>{{ recipe.tags.join(', ') }}</span></h6>
     </li>
   </ul>
