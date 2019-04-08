@@ -9,13 +9,24 @@ export class Recipe {
   public cookTime: number = 0;
   public extraTime: {time: number, name: string} = null;
   public imageUrl: string;
+  public imageData: string;
 
   public get image(): string {
-    return this.imageUrl || 'assets/images/assiette.jpg';
+    return this.imageData || this.imageUrl || 'assets/images/assiette.jpg';
   }
 
-  constructor() {
-
+  constructor(data?) {
+    this._id = data._id;
+    this.name = data.name;
+    this.ingredients = data.ingredients;
+    this.preparation = data.preparation;
+    this.tags = data.tags;
+    this.nbPortions = data.nbPortions;
+    this.prepTime = data.prepTime;
+    this.cookTime = data.cookTime;
+    this.extraTime = data.extraTime;
+    this.imageUrl = data.imageUrl;
+    this.imageData = data.imageData;
   }
 }
 

@@ -7,6 +7,7 @@ import {AutoCompleteModule, InputTextModule} from 'primeng/primeng';
 import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ChipsModule} from 'primeng/chips';
 import {ButtonModule} from 'primeng/button';
+import {DataViewModule} from 'primeng/dataview';
 
 import { AppComponent } from './app.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
@@ -41,7 +42,8 @@ const routes: Route[] = [
     InputTextareaModule,
     AutoCompleteModule,
     ChipsModule,
-    ButtonModule
+    ButtonModule,
+    DataViewModule
   ],
   providers: [RecipeService],
   bootstrap: [AppComponent]

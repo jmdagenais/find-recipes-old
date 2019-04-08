@@ -1,30 +1,41 @@
+//html, body {
+//  height: 100%;
+//}
 body {
-  background-color: #ccc;
+  background-color: #313940 !important; //#060b19 !important;
 }
 
 .main-content {
-width: 80%;
-height: 100vh;
-margin: 0 auto;
-background-color: white;
+  width: 80%;
+  min-height: 100vh;
+  margin: 0 auto;
+  background-color: white;
+  display: table;
 }
 
 .top-bar {
-  height: 60px;
+  height: 90px;
   width: 100%;
   margin: 0;
-  background-color: #000000;
+  background-color: #CEE397; //#11287A;
   padding-top: 15px;
   margin-bottom: 20px;
 
   a {
     text-decoration: none;
+    font-family: 'Sriracha', cursive;
+    position: relative;
+    top: 16px;
+
+    &:hover {
+      text-decoration: none;
+    }
   }
 
   h1 {
     color: white;
-    font-family: "Roboto", "Trebuchet MS", Arial, Helvetica, sans-serif;
     margin: 0 10px;
+    font-size: 36pt;
   }
 }
 

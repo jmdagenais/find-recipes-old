@@ -21,7 +21,8 @@ let recipeModel = new mongoose.Schema({
     name: String
   },
   tags: [String],
-  image: String
+  imageUrl: String,
+  imageData: String
 });
 
 exports.module = mongoose.model('Recipe', recipeModel);

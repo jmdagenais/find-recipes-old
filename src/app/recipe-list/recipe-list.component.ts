@@ -2,8 +2,9 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {Recipe} from '../recipe.model';
-import {Subscription} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {RecipeService} from '../shared/recipe.service';
+import {takeUntil} from 'rxjs/internal/operators';
 
 @Component({
   selector: 'app-recipe-list',
@@ -17,6 +18,7 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   displayTags: string[] = [];
   recipes: Recipe[] = [];
 
+  private unsubscribe: Subject<any> = new Subject();
   tagsSubscription: Subscription;
   recipeSubscription: Subscription;
 
@@ -28,7 +30,8 @@ export class RecipeListComponent implements OnInit, OnDestroy {
     //     this.allTags = tags;
     //   });
 
-    this.tagsSubscription = this.recipeService.getAllTags()
+    this.recipeService.getAllTags()
+      .pipe(takeUntil(this.unsubscribe))
       .subscribe((tags: string[]) => {
         this.allTags = tags;
       });
@@ -64,28 +67,14 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   // }
 
   getRecipesByTag() {
-    let url = 'http://localhost:3000/api/recipes';
-    let query = '';
-    // Build the query string
-    this.selectedTags.forEach((t: string, index: number) => {
-      if (index === 0) {
-        query += 'tags=' + t;
-      } else {
-        query += '&tags=' + t;
-      }
-    });
-    if (query.length > 0) {
-      url = url + '?' + query;
-    }
-
-    this.recipeSubscription = this.httpClient.get(url)
+    this.recipeService.getRecipes(this.selectedTags)
+      .pipe(takeUntil(this.unsubscribe))
       .subscribe((recipes: Recipe[]) => {
         this.recipes = recipes;
       });
   }
 
   ngOnDestroy() {
-    this.tagsSubscription.unsubscribe();
-    this.recipeSubscription.unsubscribe();
+    this.unsubscribe.next();
   }
 }
