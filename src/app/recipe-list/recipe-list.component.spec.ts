@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecipeListComponent } from './recipe-list.component';
+import {AutoCompleteModule} from 'primeng/primeng';
+import {PrimeNgModule} from '../primeNg.module';
 
 describe('RecipeListComponent', () => {
   let component: RecipeListComponent;
@@ -8,6 +10,7 @@ describe('RecipeListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [PrimeNgModule],
       declarations: [ RecipeListComponent ]
     })
     .compileComponents();

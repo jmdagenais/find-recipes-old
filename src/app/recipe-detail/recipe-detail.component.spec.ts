@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RecipeDetailComponent } from './recipe-detail.component';
+import {PrimeNgModule} from '../primeNg.module';
+import {TimeFormatPipe} from '../shared/pipe/time-format/time-format.pipe';
 
 describe('RecipeDetailComponent', () => {
   let component: RecipeDetailComponent;
@@ -8,7 +10,9 @@ describe('RecipeDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ RecipeDetailComponent ]
+      imports: [PrimeNgModule],
+      declarations: [ RecipeDetailComponent,
+      TimeFormatPipe]
     })
     .compileComponents();
   }));

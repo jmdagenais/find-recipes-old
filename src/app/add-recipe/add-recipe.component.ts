@@ -5,6 +5,8 @@ import {HttpClient} from '@angular/common/http';
 import {Recipe} from '../recipe.model';
 import {environment} from '../../environments/environment';
 import {Router} from '@angular/router';
+import {DomSanitizer} from '@angular/platform-browser';
+import {RecipeService} from '../shared/recipe.service';
 
 @Component({
   selector: 'app-add-recipe',
@@ -21,7 +23,8 @@ export class AddRecipeComponent implements OnInit {
   public showExtraTime = false;
 
   constructor(
-    private http: HttpClient,
+    private recipeService: RecipeService,
+    private sanitizer: DomSanitizer,
     private router: Router) { }
 
   ngOnInit() {
@@ -49,10 +52,9 @@ export class AddRecipeComponent implements OnInit {
 
   submit(form: NgForm) {
     if (form.valid) {
-      const url = environment.api_url;
 
       // save recipe to the DB
-      this.http.post(url + 'recipes', this.recipe)
+      this.recipeService.createRecipe(new Recipe(form.value))
         .subscribe((val) => {
           form.reset();
           this.tags = [];

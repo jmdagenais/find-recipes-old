@@ -1,3 +1,5 @@
+import {StringUtils} from './shared/StringUtils';
+
 export class Recipe {
   public _id: string;
   public name: string;
@@ -10,23 +12,37 @@ export class Recipe {
   public extraTime: {time: number, name: string} = null;
   public imageUrl: string;
   public imageData: string;
+  public tip: string;
 
   public get image(): string {
     return this.imageData || this.imageUrl || 'assets/images/assiette.jpg';
   }
 
   constructor(data?) {
-    this._id = data._id;
-    this.name = data.name;
-    this.ingredients = data.ingredients;
-    this.preparation = data.preparation;
-    this.tags = data.tags;
-    this.nbPortions = data.nbPortions;
-    this.prepTime = data.prepTime;
-    this.cookTime = data.cookTime;
-    this.extraTime = data.extraTime;
-    this.imageUrl = data.imageUrl;
-    this.imageData = data.imageData;
+    if (data) {
+      this._id = data._id;
+      this.name = data.name;
+      this.ingredients = data.ingredients;
+      this.preparation = data.preparation;
+      this.tags = data.tags;
+      this.nbPortions = data.nbPortions;
+      this.prepTime = data.prepTime;
+      this.cookTime = data.cookTime;
+      this.extraTime = data.extraTime;
+      this.imageUrl = data.imageUrl;
+      this.imageData = data.imageData;
+      this.tip = data.tip;
+    }
+  }
+
+  static sanitize(recipe: Recipe) {
+    recipe.name = StringUtils.escapeString(recipe.name);
+    recipe.ingredients = StringUtils.escapeString(recipe.ingredients);
+    recipe.preparation = StringUtils.escapeString(recipe.preparation);
+    recipe.tip = StringUtils.escapeString(recipe.tip);
+    if (recipe.extraTime) {
+      recipe.extraTime.name = StringUtils.escapeString(recipe.extraTime.name);
+    }
   }
 }
 

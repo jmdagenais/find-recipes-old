@@ -22,7 +22,8 @@ let recipeModel = new mongoose.Schema({
   },
   tags: [String],
   imageUrl: String,
-  imageData: String
+  imageData: String,
+  tip: String
 });
 
 exports.module = mongoose.model('Recipe', recipeModel);

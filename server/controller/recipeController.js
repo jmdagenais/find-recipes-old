@@ -65,9 +65,9 @@ function recipeController(Recipe){
 
   let createRecipe = (req, res) => {
     let newRecipe = new Recipe(req.body);
-    image2base64(newRecipe.image)
+    image2base64(newRecipe.imageUrl)
       .then(response => {
-        newRecipe.image = `data:image/png;base64,${response}`;
+        newRecipe.imageData = `data:image/png;base64,${response}`;
         saveRecipe(res, newRecipe);
       })
       .catch((err) => {
