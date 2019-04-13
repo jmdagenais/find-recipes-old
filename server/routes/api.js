@@ -11,7 +11,8 @@ router.route('/recipes')
 
 router.route('/recipes/:id')
   .get(recipeController.getRecipe)
-  .put(recipeController.updateRecipe);
+  .put(recipeController.updateRecipe)
+  .delete(recipeController.deleteRecipe);
 
 
 router.get('/tags', recipeController.listAllTags);

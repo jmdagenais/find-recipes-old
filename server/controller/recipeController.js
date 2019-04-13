@@ -71,6 +71,7 @@ function recipeController(Recipe){
         saveRecipe(res, newRecipe);
       })
       .catch((err) => {
+        console.log('image2base64 failed.');
         saveRecipe(res, newRecipe);
       });
 
@@ -99,12 +100,26 @@ function recipeController(Recipe){
       })
   }
 
+  deleteRecipe = async (req, res) => {
+    try {
+      // let recipe = await Recipe.findById(req.params.id);
+      // recipe.delete()
+
+      await Recipe.deleteOne({_id: req.params.id});
+      res.sendStatus(204);
+    } catch(err) {
+      res.status(500);
+      res.send(err);
+    }
+  };
+
   return {
     listAllTags,
     getRecipes,
     createRecipe,
     getRecipe,
-    updateRecipe
+    updateRecipe,
+    deleteRecipe
   }
 }
 
