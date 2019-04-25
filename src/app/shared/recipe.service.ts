@@ -6,6 +6,7 @@ import {environment} from '../../environments/environment';
 import {map, tap} from 'rxjs/internal/operators';
 import {Recipe} from '../recipe.model';
 import {DomSanitizer} from '@angular/platform-browser';
+import {StringUtils} from './StringUtils';
 
 @Injectable()
 export class RecipeService {
@@ -56,12 +57,30 @@ export class RecipeService {
   getRecipe(id: string): Observable<Recipe> {
     return this.http.get(this.API_URL + '/recipes/' + id)
       .pipe(map((recipe: Recipe) => {
+        recipe.ingredients = StringUtils.removeHtmlEntities(recipe.ingredients);
+        recipe.preparation = StringUtils.removeHtmlEntities(recipe.preparation);
+        recipe.tip = StringUtils.removeHtmlEntities(recipe.tip);
         return new Recipe(recipe);
       }));
   }
 
   createRecipe(recipe: Recipe) {
-    // sanitize the values before saving
+    this.sanitizeRecipe(recipe);
+
+    // save recipe to the DB
+    return this.http.post(this.API_URL + '/recipes', recipe);
+  }
+
+  updateRecipe(id: string, recipe: Recipe) {
+    this.sanitizeRecipe(recipe);
+    return this.http.put(this.API_URL + '/recipes/' + id, recipe);
+  }
+
+  deleteRecipe(id: string) {
+    return this.http.delete(this.API_URL + '/recipes/' + id);
+  }
+
+  private sanitizeRecipe(recipe: Recipe) {
     recipe.name = this.sanitizer.sanitize(SecurityContext.HTML, recipe.name);
     recipe.ingredients = this.sanitizer.sanitize(SecurityContext.HTML, recipe.ingredients);
     recipe.preparation = this.sanitizer.sanitize(SecurityContext.HTML, recipe.preparation);
@@ -69,8 +88,5 @@ export class RecipeService {
     if (recipe.extraTime) {
       recipe.extraTime.name = this.sanitizer.sanitize(SecurityContext.HTML, recipe.extraTime.name);
     }
-
-    // save recipe to the DB
-    return this.http.post(this.API_URL + '/recipes', recipe);
   }
 }

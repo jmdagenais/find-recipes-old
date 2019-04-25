@@ -34,7 +34,7 @@ function recipeController(Recipe){
         res.json(recipes);
       })
       .catch((err) => {
-      console.log("success CB");
+      console.log("error CB");
           res.status(500);
           res.send(err);
       })
@@ -43,7 +43,6 @@ function recipeController(Recipe){
   function getAllRecipes(res) {
     Recipe.find()
       .then((recipes) => {
-      console.log('get All');
         res.json(recipes);
       })
       .catch((err) => {
@@ -65,25 +64,32 @@ function recipeController(Recipe){
 
   let createRecipe = (req, res) => {
     let newRecipe = new Recipe(req.body);
-    image2base64(newRecipe.imageUrl)
-      .then(response => {
-        newRecipe.imageData = `data:image/png;base64,${response}`;
-        saveRecipe(res, newRecipe);
-      })
-      .catch((err) => {
-        console.log('image2base64 failed.');
-        saveRecipe(res, newRecipe);
-      });
+    saveRecipe(res, newRecipe);
+
+    // image2base64(newRecipe.imageUrl)
+    //   .then(response => {
+    //     newRecipe.imageData = `data:image/png;base64,${response}`;
+    //     saveRecipe(res, newRecipe);
+    //   })
+    //   .catch((err) => {
+    //     console.log('image2base64 failed.');
+    //     saveRecipe(res, newRecipe);
+    //   });
 
   };
 
   let updateRecipe = async (req, res) => {
     try {
       let recipe = await Recipe.findById(req.params.id);
+      // if image url has changed, delete imageData
+      if(recipe.imageUrl !== req.body.imageUrl) {
+        recipe.imageData = '';
+      }
       recipe = Object.assign(recipe, req.body);
       await recipe.save();
       res.send(recipe);
     } catch (err) {
+      console.log('Error in update: ', err);
       res.sendStatus(500);
     }
   };

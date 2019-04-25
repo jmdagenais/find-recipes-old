@@ -20,4 +20,10 @@ export class StringUtils {
 
     return output;
   }
+
+  static removeHtmlEntities(input: string) {
+    if (input) {
+      return input.replace(/&#(\d+);/g, function(match, match2) {return String.fromCharCode(+match2); });
+    }
+  }
 }

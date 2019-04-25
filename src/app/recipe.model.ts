@@ -6,7 +6,7 @@ export class Recipe {
   public ingredients: string;
   public preparation: string;
   public tags: string[];
-  public nbPortions: number;
+  public nbPortions: number = 1;
   public prepTime: number = 0;
   public cookTime: number = 0;
   public extraTime: {time: number, name: string} = null;

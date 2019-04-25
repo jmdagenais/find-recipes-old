@@ -2,6 +2,11 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AddRecipeComponent } from './add-recipe.component';
 import {PrimeNgModule} from '../primeNg.module';
+import {FormsModule} from '@angular/forms';
+import {RouterTestingModule} from '@angular/router/testing';
+import {RecipeService} from '../shared/recipe.service';
+import {HttpClientModule} from '@angular/common/http';
+import {TagSelectorComponent} from '../tag-selector/tag-selector.component';
 
 describe('AddRecipeComponent', () => {
   let component: AddRecipeComponent;
@@ -9,8 +14,9 @@ describe('AddRecipeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [PrimeNgModule],
-      declarations: [ AddRecipeComponent ]
+      imports: [PrimeNgModule, FormsModule, RouterTestingModule, HttpClientModule],
+      providers: [RecipeService],
+      declarations: [ AddRecipeComponent, TagSelectorComponent ]
     })
     .compileComponents();
   }));

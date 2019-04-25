@@ -19,7 +19,8 @@ const routes: Route[] = [
   {path: '', component: RecipeListComponent},
   {path: 'recipes', component: RecipeListComponent},
   {path: 'recipes/add', component: AddRecipeComponent},
-  {path: 'recipes/:id', component: RecipeDetailComponent}
+  {path: 'recipes/:id', component: RecipeDetailComponent},
+  {path: 'recipes/:id/edit', component: AddRecipeComponent}
 ];
 
 @NgModule({
@@ -38,7 +39,7 @@ const routes: Route[] = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
-    PrimeNgModule
+    PrimeNgModule,
   ],
   providers: [RecipeService],
   bootstrap: [AppComponent]

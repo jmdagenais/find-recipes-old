@@ -4,10 +4,10 @@
     <div class="col-12 col-md-6">
       <img [src]="recipe?.image" id="recipePic">
     </div>
-    <div class="col-12 col-md-6">
-      <span>Portions: {{recipe?.nbPortions}}</span><br>
-      <span>Préparation: {{recipe?.prepTime | timeFormat}}</span><br>
-      <span>Cuisson: {{recipe?.cookTime | timeFormat}}</span> min<br>
+    <div class="col-12 col-md-6 d-flex flex-column">
+      <span>Portions: {{recipe?.nbPortions}}</span>
+      <span *ngIf="recipe?.prepTime > 0">Préparation: {{recipe?.prepTime | timeFormat}}</span>
+      <span *ngIf="recipe?.cookTime > 0">Cuisson: {{recipe?.cookTime | timeFormat}}</span>
       <span *ngIf="recipe?.extraTime">{{recipe?.extraTime.name || 'Temps extra'}}: {{recipe?.extraTime.time | timeFormat}}</span>
     </div>
   </div>
@@ -31,5 +31,10 @@
   <div class="cooking-tip" *ngIf="recipe?.tip">
     <span>Conseil:</span>
     {{recipe?.tip}}
+  </div>
+
+  <div>
+    <button (click)="deleteRecipe()">Supprimer</button>
+    <button routerLink="edit">Modifier</button>
   </div>
 </div>
