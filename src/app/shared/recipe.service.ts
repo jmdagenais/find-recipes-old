@@ -19,7 +19,6 @@ export class RecipeService {
   }
 
   getAllTags(): Observable<string[]> {
-    // const tags = ['poulet', 'poisson', 'pâtes', 'dessert', 'chocolat', 'boeuf', 'végétarien'];
     if (this.tags) {
       return of(this.tags);
     } else {
@@ -66,18 +65,32 @@ export class RecipeService {
 
   createRecipe(recipe: Recipe) {
     this.sanitizeRecipe(recipe);
+    this.updateTags(recipe.tags);
 
-    // save recipe to the DB
     return this.http.post(this.API_URL + '/recipes', recipe);
   }
 
   updateRecipe(id: string, recipe: Recipe) {
     this.sanitizeRecipe(recipe);
+    this.updateTags(recipe.tags);
+
     return this.http.put(this.API_URL + '/recipes/' + id, recipe);
   }
 
   deleteRecipe(id: string) {
     return this.http.delete(this.API_URL + '/recipes/' + id);
+  }
+
+  /**
+   * updated the cached list of tags
+   * @param {string[]} tags
+   */
+  private updateTags(tags: string[]) {
+    tags.forEach(tag => {
+      if (!this.tags.includes(tag)) {
+        this.tags.push(tag);
+      }
+    });
   }
 
   private sanitizeRecipe(recipe: Recipe) {

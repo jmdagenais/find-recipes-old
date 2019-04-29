@@ -13,7 +13,7 @@ import {TagSelectorComponent} from './tag-selector/tag-selector.component';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { TimeFormatPipe } from './shared/pipe/time-format/time-format.pipe';
 import {PrimeNgModule} from './primeNg.module';
-import {HtmlifyPipe} from './shared/pipe/htmlize/htmlify.pipe';
+import {HtmlifyPipe} from './shared/pipe/htmlify/htmlify.pipe';
 
 const routes: Route[] = [
   {path: '', component: RecipeListComponent},

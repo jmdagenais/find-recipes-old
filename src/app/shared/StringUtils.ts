@@ -8,19 +8,6 @@ export class StringUtils {
     return output;
   }
 
-  static convertToHTML(value: string) {
-    let output = value.replace(/\[b\]/g, '<b>');
-    output = output.replace(/\[\/b\]/g, '</b>');
-    output = output.replace(/\[i\]/g, '<i>');
-    output = output.replace(/\[\/i\]/g, '</i>');
-    output = output.replace(/\[u\]/g, '<u>');
-    output = output.replace(/\[\/u\]/g, '</u>');
-    output = output.replace(/\n/g, '<br>');
-    output = output.replace(/\r/g, '<br>');
-
-    return output;
-  }
-
   static removeHtmlEntities(input: string) {
     if (input) {
       return input.replace(/&#(\d+);/g, function(match, match2) {return String.fromCharCode(+match2); });

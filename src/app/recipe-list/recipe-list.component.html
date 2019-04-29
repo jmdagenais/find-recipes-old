@@ -14,6 +14,9 @@
   </div>
   <ul class="list-group">
     <li class="list-group-item d-flex" *ngFor="let recipe of recipes">
+      <div class="image-container">
+        <img [src]="recipe.imageUrl || 'assets/images/assiette.jpg'" height="100">
+      </div>
       <a class="recipe-name-link" [routerLink]="['/recipes', recipe._id]">{{recipe.name}}</a>
       <span>{{ recipe.tags.join(', ') }}</span>
     </li>

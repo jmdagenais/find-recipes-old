@@ -7,6 +7,7 @@ import {FormsModule} from '@angular/forms';
 import {RouterTestingModule} from '@angular/router/testing';
 import {HttpClientModule} from '@angular/common/http';
 import {RecipeService} from '../shared/recipe.service';
+import {HtmlifyPipe} from '../shared/pipe/htmlify/htmlify.pipe';
 
 describe('RecipeDetailComponent', () => {
   let component: RecipeDetailComponent;
@@ -17,7 +18,8 @@ describe('RecipeDetailComponent', () => {
       imports: [PrimeNgModule, FormsModule, RouterTestingModule, HttpClientModule],
       providers: [RecipeService],
       declarations: [ RecipeDetailComponent,
-      TimeFormatPipe]
+      TimeFormatPipe,
+      HtmlifyPipe]
     })
     .compileComponents();
   }));

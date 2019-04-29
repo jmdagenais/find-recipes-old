@@ -29,8 +29,8 @@ export class RecipeDetailComponent implements OnInit {
         this.recipeService.getRecipe(params.id)
           .subscribe(recipe => {
             this.recipe = recipe;
-            this.ingredients = this.sanitizer.bypassSecurityTrustHtml(StringUtils.convertToHTML(recipe.ingredients));
-            this.preparation = this.sanitizer.bypassSecurityTrustHtml(StringUtils.convertToHTML(recipe.preparation));
+            // this.ingredients = this.sanitizer.bypassSecurityTrustHtml(StringUtils.convertToHTML(recipe.ingredients));
+            // this.preparation = this.sanitizer.bypassSecurityTrustHtml(StringUtils.convertToHTML(recipe.preparation));
           });
       });
   }
