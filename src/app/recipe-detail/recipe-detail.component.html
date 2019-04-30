@@ -1,7 +1,7 @@
 <div>
   <h2>{{recipe?.name}}</h2>
   <div class="row">
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-3 mb-3">
       <img [src]="recipe?.image" id="recipePic">
     </div>
     <div class="col-12 col-md-6 d-flex flex-column">
@@ -30,7 +30,7 @@
   </div>
 
   <div>
-    <button (click)="deleteRecipe()">Supprimer</button>
-    <button routerLink="edit">Modifier</button>
+    <button pButton class="ui-button-secondary" routerLink="edit" label="Modifier"></button>
+    <button pButton class="ui-button-danger" (click)="deleteRecipe()" label="Supprimer"></button>
   </div>
 </div>

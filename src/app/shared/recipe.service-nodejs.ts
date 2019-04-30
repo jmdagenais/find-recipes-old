@@ -9,7 +9,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {StringUtils} from './StringUtils';
 
 @Injectable()
-export class RecipeService {
+export class RecipeServiceNode {
 
   private tags: string[];
   private API_URL = environment.api_url;
@@ -19,6 +19,7 @@ export class RecipeService {
   }
 
   getAllTags(): Observable<string[]> {
+    // const tags = ['poulet', 'poisson', 'pâtes', 'dessert', 'chocolat', 'boeuf', 'végétarien'];
     if (this.tags) {
       return of(this.tags);
     } else {
@@ -64,42 +65,24 @@ export class RecipeService {
   }
 
   createRecipe(recipe: Recipe) {
-    this.sanitizeRecipe(recipe);
-    this.updateTags(recipe.tags);
+    // sanitize the values before saving
+    recipe.name = this.sanitizer.sanitize(SecurityContext.HTML, recipe.name);
+    recipe.ingredients = this.sanitizer.sanitize(SecurityContext.HTML, recipe.ingredients);
+    recipe.preparation = this.sanitizer.sanitize(SecurityContext.HTML, recipe.preparation);
+    recipe.tip = this.sanitizer.sanitize(SecurityContext.HTML, recipe.tip);
+    if (recipe.extraTime) {
+      recipe.extraTime.name = this.sanitizer.sanitize(SecurityContext.HTML, recipe.extraTime.name);
+    }
 
+    // save recipe to the DB
     return this.http.post(this.API_URL + '/recipes', recipe);
   }
 
   updateRecipe(id: string, recipe: Recipe) {
-    this.sanitizeRecipe(recipe);
-    this.updateTags(recipe.tags);
-
     return this.http.put(this.API_URL + '/recipes/' + id, recipe);
   }
 
   deleteRecipe(id: string) {
     return this.http.delete(this.API_URL + '/recipes/' + id);
-  }
-
-  /**
-   * updated the cached list of tags
-   * @param {string[]} tags
-   */
-  private updateTags(tags: string[]) {
-    tags.forEach(tag => {
-      if (!this.tags.includes(tag)) {
-        this.tags.push(tag);
-      }
-    });
-  }
-
-  private sanitizeRecipe(recipe: Recipe) {
-    recipe.name = StringUtils.escapeString(recipe.name);
-    recipe.ingredients = StringUtils.escapeString(recipe.ingredients);
-    recipe.preparation = StringUtils.escapeString(recipe.preparation);
-    recipe.tip = StringUtils.escapeString(recipe.tip);
-    if (recipe.extraTime) {
-      recipe.extraTime.name = StringUtils.escapeString(recipe.extraTime.name);
-    }
   }
 }

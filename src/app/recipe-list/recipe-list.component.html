@@ -19,7 +19,7 @@
       </div>
       <div>
         <a class="recipe-name-link" [routerLink]="['/recipes', recipe._id]">{{recipe.name}}</a>
-        <div class="d-flex time-indicator">
+        <div class="d-none d-sm-flex time-indicator">
           <span>préparation: {{recipe.prepTime | timeFormat}}</span>
           <span *ngIf="recipe.cookTime > 0">cuisson: {{recipe.cookTime | timeFormat}}</span>
           <span *ngIf="recipe.extraTime">{{recipe.extraTime.name}}: {{recipe.extraTime.time | timeFormat}}</span>

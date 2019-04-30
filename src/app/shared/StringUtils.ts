@@ -2,9 +2,12 @@ export class StringUtils {
   /**
    * escape string to prevent html and javascript injection
    */
-  static escapeString(input: string) {
-    let output = input.replace(/</g, '&lt;');
-    output = output.replace(/>/g, '&gt;');
+  static escapeString(input: string): string {
+    let output = '';
+    if (input) {
+      output = input.replace(/</g, '&lt;');
+      output = output.replace(/>/g, '&gt;');
+    }
     return output;
   }
 

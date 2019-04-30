@@ -84,9 +84,17 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
         .subscribe((val) => {
           form.reset();
           this.tags = [];
-          this.router.navigate(['..']);
+          if (this.recipe._id) {
+            this.router.navigate(['/recipes', this.recipe._id]);
+          } else {
+            this.router.navigate(['/']);
+          }
         });
     }
+  }
+
+  cancel() {
+    this.router.navigate(['/']);
   }
 
   ngOnDestroy() {

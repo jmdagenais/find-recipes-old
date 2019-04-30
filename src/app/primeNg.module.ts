@@ -5,6 +5,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {ChipsModule} from 'primeng/chips';
 import {ButtonModule} from 'primeng/button';
 import {DataViewModule} from 'primeng/dataview';
+import {MessageModule} from 'primeng/message';
 
 @NgModule({
   imports: [
@@ -13,7 +14,8 @@ import {DataViewModule} from 'primeng/dataview';
     AutoCompleteModule,
     ChipsModule,
     ButtonModule,
-    DataViewModule
+    DataViewModule,
+    MessageModule
   ],
   exports: [
     InputTextModule,
@@ -21,7 +23,8 @@ import {DataViewModule} from 'primeng/dataview';
     AutoCompleteModule,
     ChipsModule,
     ButtonModule,
-    DataViewModule
+    DataViewModule,
+    MessageModule
   ]
 })
 export class PrimeNgModule {}
