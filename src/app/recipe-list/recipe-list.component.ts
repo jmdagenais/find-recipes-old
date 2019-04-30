@@ -74,6 +74,13 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       });
   }
 
+  onSelectTag(tag: string) {
+    if (!this.selectedTags.includes(tag)) {
+      this.selectedTags.push(tag);
+      this.getRecipesByTag();
+    }
+  }
+
   ngOnDestroy() {
     this.unsubscribe.next();
   }

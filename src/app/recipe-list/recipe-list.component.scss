@@ -1,18 +1,38 @@
 .list-group-item {
 
+  a {
+    color: #333;
+  }
+
   .recipe-name-link {
     font-weight: bold;
     margin-right: 24px;
   }
 
-  span {
-    font-size: small;
-    color: #999;
+  .tags-list {
+    position: absolute;
+    bottom: 12px;
+
+    span {
+      font-size: small;
+      margin-right: 1em;
+      text-decoration: underline;
+      cursor: pointer;
+      a {
+        color: #999;
+      }
+    }
   }
 
   .image-container {
     width: 220px;
     text-align: center;
     vertical-align: middle;
+  }
+
+  .time-indicator {
+    span {
+      margin-right: 12px;
+    }
   }
 }
