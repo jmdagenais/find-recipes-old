@@ -7,14 +7,14 @@ import {map, tap} from 'rxjs/internal/operators';
 import {Recipe} from '../recipe.model';
 import {DomSanitizer} from '@angular/platform-browser';
 import {StringUtils} from './StringUtils';
+import {Api} from './api';
 
 @Injectable()
 export class RecipeService {
 
   private tags: string[];
   private API_URL = environment.api_url;
-  constructor(private http: HttpClient,
-    private sanitizer: DomSanitizer) {
+  constructor(private api: Api) {
 
   }
 
@@ -22,7 +22,7 @@ export class RecipeService {
     if (this.tags) {
       return of(this.tags);
     } else {
-      return this.http.get(this.API_URL + '/tags')
+      return this.api.get('/tags')
         .pipe(tap((tags: string[]) => {
           this.tags = tags;
         }));
@@ -44,7 +44,7 @@ export class RecipeService {
       url = url + '?' + query;
     }
 
-    return this.http.get(this.API_URL + url)
+    return this.api.get(url)
       .pipe(map((recipes: Recipe[]) => {
         recipes.map(recipe => {
           return new Recipe(recipe);
@@ -54,7 +54,7 @@ export class RecipeService {
   }
 
   getRecipe(id: string): Observable<Recipe> {
-    return this.http.get(this.API_URL + '/recipes/' + id)
+    return this.api.get('/recipes/' + id)
       .pipe(map((recipe: Recipe) => {
         recipe.ingredients = StringUtils.removeHtmlEntities(recipe.ingredients);
         recipe.preparation = StringUtils.removeHtmlEntities(recipe.preparation);
@@ -67,18 +67,18 @@ export class RecipeService {
     this.sanitizeRecipe(recipe);
     this.updateTags(recipe.tags);
 
-    return this.http.post(this.API_URL + '/recipes', recipe);
+    return this.api.post('/recipes', recipe);
   }
 
   updateRecipe(id: string, recipe: Recipe) {
     this.sanitizeRecipe(recipe);
     this.updateTags(recipe.tags);
 
-    return this.http.put(this.API_URL + '/recipes/' + id, recipe);
+    return this.api.put('/recipes/' + id, recipe);
   }
 
   deleteRecipe(id: string) {
-    return this.http.delete(this.API_URL + '/recipes/' + id);
+    return this.api.delete('/recipes/' + id);
   }
 
   /**
