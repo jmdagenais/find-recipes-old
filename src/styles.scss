@@ -52,5 +52,16 @@ body {
   .main-content {
     width: 100%;
   }
+}
 
+@media (max-width: 520px) {
+  .top-bar h1 {
+    font-size: 30pt;
+  }
+}
+
+@media (max-width: 350px) {
+  .top-bar h1 {
+    font-size: 26pt;
+  }
 }

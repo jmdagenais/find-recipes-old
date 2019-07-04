@@ -7,7 +7,7 @@ import {Router} from '@angular/router';
   template: `
     <form class="d-flex" (submit)="submit()">
       <h5>Entrer le mot de passe pour avoir les droits d'administrateur: </h5>
-      <input pInputText type="text" style="margin-left: 10px; margin-right: 10px" [(ngModel)]="password" name="password">
+      <input pInputText type="password" style="margin-left: 10px; margin-right: 10px" [(ngModel)]="password" name="password">
       <button type="submit" pButton label="Ok"></button>
     </form>
   `

@@ -26,6 +26,7 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
   public showExtraTime = false;
   public hasError = false;
   public editMode = false;
+  public extraTimeLabelEditing = false;
 
   constructor(
     private recipeService: RecipeService,
@@ -42,6 +43,9 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
             .pipe(takeUntil(this.unsubscribe))
             .subscribe((value: Recipe) => {
               this.recipe = value;
+              if (this.recipe.extraTime > 0) {
+                this.showExtraTime = true
+              }
               this.hasError = false;
             }, (error) => {
               this.hasError = true;
@@ -62,16 +66,21 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
     this.tags.splice(index, 1);
   }
 
-  // onKeyPress(event: KeyboardEvent) {
-  //   if (event.keyCode === 13) {
-  //     event.preventDefault();
-  //     this.addTag(this.currentTag);
-  //   }
-  // }
+  onExtraTimeLabelKeypress(event: KeyboardEvent) {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      this.extraTimeLabelEditing = false;
+      console.log('wazaaa!')
+    }
+  }
 
   submit(form: NgForm) {
     if (form.valid) {
       let observable: Observable<any>;
+
+      // if (this.showExtraTime) {
+      //   this.recipe.extraTime = this.extraTime;
+      // }
       // save recipe to the DB
       if (this.editMode) {
         observable = this.recipeService.updateRecipe(this.recipe._id, this.recipe);

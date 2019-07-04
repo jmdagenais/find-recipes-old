@@ -6,6 +6,7 @@ import {ChipsModule} from 'primeng/chips';
 import {ButtonModule} from 'primeng/button';
 import {DataViewModule} from 'primeng/dataview';
 import {MessageModule} from 'primeng/message';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import {MessageModule} from 'primeng/message';
     ChipsModule,
     ButtonModule,
     DataViewModule,
-    MessageModule
+    MessageModule,
+    ConfirmDialogModule
   ],
   exports: [
     InputTextModule,
@@ -24,7 +26,8 @@ import {MessageModule} from 'primeng/message';
     ChipsModule,
     ButtonModule,
     DataViewModule,
-    MessageModule
+    MessageModule,
+    ConfirmDialogModule
   ]
 })
 export class PrimeNgModule {}

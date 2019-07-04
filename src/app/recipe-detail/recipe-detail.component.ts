@@ -7,6 +7,8 @@ import {Observable} from 'rxjs/index';
 import {Recipe} from '../recipe.model';
 import {StringUtils} from '../shared/StringUtils';
 import {take} from 'rxjs/internal/operators';
+import { AuthService } from '../auth/auth.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -19,9 +21,10 @@ export class RecipeDetailComponent implements OnInit {
   ingredients: SafeHtml;
   preparation: SafeHtml;
   constructor(private recipeService: RecipeService,
+              private authService: AuthService,
               private route: ActivatedRoute,
               private router: Router,
-              private sanitizer: DomSanitizer) { }
+              private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.route.params
@@ -29,8 +32,6 @@ export class RecipeDetailComponent implements OnInit {
         this.recipeService.getRecipe(params.id)
           .subscribe(recipe => {
             this.recipe = recipe;
-            // this.ingredients = this.sanitizer.bypassSecurityTrustHtml(StringUtils.convertToHTML(recipe.ingredients));
-            // this.preparation = this.sanitizer.bypassSecurityTrustHtml(StringUtils.convertToHTML(recipe.preparation));
           });
       });
   }
@@ -42,5 +43,20 @@ export class RecipeDetailComponent implements OnInit {
         this.router.navigate(['/']);
       });
   }
+
+  confirmDelete() {
+    this.confirmationService.confirm({
+      message: 'Voulez-vous vraiment supprimer cette recette?',
+      accept: () => {
+        this.deleteRecipe();
+      }
+    });
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated;
+  }
+
+
 
 }

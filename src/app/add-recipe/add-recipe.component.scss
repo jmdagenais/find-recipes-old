@@ -4,7 +4,7 @@
 }
 
 #recipePic {
-  width: 300px;
+  width: 100%;
 }
 
 .time-input {
@@ -21,4 +21,21 @@
     margin: 0 1em 0 1em;
   }
 
+}
+
+.extraTimeLabel {
+  i {
+    visibility: hidden;
+  }
+
+  &:hover {
+    i {
+      visibility: visible;
+    }
+  }
+}
+
+#extraTimeLabel {
+  width: 9rem;
+  margin-left: 0;
 }

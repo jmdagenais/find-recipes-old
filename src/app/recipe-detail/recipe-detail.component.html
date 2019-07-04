@@ -8,7 +8,7 @@
       <span>Portions: {{recipe?.nbPortions}}</span>
       <span *ngIf="recipe?.prepTime > 0">Préparation: {{recipe?.prepTime | timeFormat}}</span>
       <span *ngIf="recipe?.cookTime > 0">Cuisson: {{recipe?.cookTime | timeFormat}}</span>
-      <span *ngIf="recipe?.extraTime">{{recipe?.extraTime.name || 'Temps extra'}}: {{recipe?.extraTime.time | timeFormat}}</span>
+      <span *ngIf="recipe?.extraTime > 0">{{recipe?.extraTimeLabel}}: {{recipe?.extraTime | timeFormat}}</span>
     </div>
   </div>
 
@@ -30,7 +30,24 @@
   </div>
 
   <div>
-    <button pButton class="ui-button-secondary" routerLink="edit" label="Modifier"></button>
-    <button pButton class="ui-button-danger" (click)="deleteRecipe()" label="Supprimer"></button>
+    <button pButton 
+      class="ui-button-secondary" 
+      routerLink="edit" 
+      label="Modifier" 
+      *ngIf="isAuthenticated()">
+    </button>
+
+    <button pButton 
+      class="ui-button-danger" 
+      (click)="confirmDelete()" 
+      label="Supprimer" 
+      *ngIf="isAuthenticated()"></button>
   </div>
+
+  <p-confirmDialog #dialog header="Confirmation" icon="pi pi-exclamation-triangle">
+    <p-footer>
+      <button type="button" pButton icon="pi pi-times" label="Non" (click)="dialog.reject()"></button>
+      <button type="button" pButton icon="pi pi-check" label="Oui" (click)="dialog.accept()"></button>
+    </p-footer>
+  </p-confirmDialog>
 </div>

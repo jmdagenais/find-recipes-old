@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {Route, RouterModule} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {ConfirmationService} from 'primeng/api';
 
 import { AppComponent } from './app.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
@@ -45,7 +46,7 @@ const routes: Route[] = [
     RouterModule.forRoot(routes),
     PrimeNgModule,
   ],
-  providers: [RecipeService],
+  providers: [RecipeService, ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -61,21 +61,28 @@
       </div>
       <button type="button" *ngIf="!showExtraTime" (click)="showExtraTime = true" pButton label="+ de temps"></button>
       <div *ngIf="showExtraTime" class="time-input">
-        <label>Temps extra:</label>
+        <label 
+          class="extraTimeLabel" 
+          (click)="extraTimeLabelEditing = true"
+          *ngIf="!extraTimeLabelEditing">
+          {{recipe.extraTimeLabel}}: <i class="fa fa-pencil"></i>
+        </label>
+
+        <input
+          *ngIf="extraTimeLabelEditing"
+          type="text"
+          id="extraTimeLabel"
+          name="extraTimeLabel"
+          [(ngModel)]="recipe.extraTimeLabel"
+          (keypress)="onExtraTimeLabelKeypress($event)"
+          pInputText>
         <input
           type="number"
           id="extraTime"
           name="extraTime"
-          [(ngModel)]="extraTime.time"
+          [(ngModel)]="recipe.extraTime"
           pInputText>
         min.
-        <input
-          type="text"
-          id="extraTimeName"
-          name="extraTimeName"
-          [(ngModel)]="extraTime.name"
-          placeholder=""
-          pInputText>
       </div>
     </div>
   </div>

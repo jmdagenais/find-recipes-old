@@ -34,7 +34,7 @@ export class Api {
   post(path: string, body: any) {
     path = this.cleanPath(path);
 
-    return this.http.post(this.API_URL + path, body);
+    return this.http.post(this.API_URL + path, body, { 'headers': this.headers });
   }
 
   delete(path: string) {

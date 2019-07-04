@@ -82,15 +82,17 @@ export class RecipeService {
   }
 
   /**
-   * updated the cached list of tags
+   * update the cached list of tags
    * @param {string[]} tags
    */
   private updateTags(tags: string[]) {
-    tags.forEach(tag => {
-      if (!this.tags.includes(tag)) {
-        this.tags.push(tag);
-      }
-    });
+    if (tags) {
+      tags.forEach(tag => {
+        if (!this.tags.includes(tag)) {
+          this.tags.push(tag);
+        }
+      });
+    }
   }
 
   private sanitizeRecipe(recipe: Recipe) {
@@ -98,8 +100,6 @@ export class RecipeService {
     recipe.ingredients = StringUtils.escapeString(recipe.ingredients);
     recipe.preparation = StringUtils.escapeString(recipe.preparation);
     recipe.tip = StringUtils.escapeString(recipe.tip);
-    if (recipe.extraTime) {
-      recipe.extraTime.name = StringUtils.escapeString(recipe.extraTime.name);
-    }
+    recipe.extraTimeLabel = StringUtils.escapeString(recipe.extraTimeLabel);
   }
 }

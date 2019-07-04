@@ -9,13 +9,14 @@ export class Recipe {
   public nbPortions: number = 1;
   public prepTime: number = 0;
   public cookTime: number = 0;
-  public extraTime: {time: number, name: string} = null;
+  public extraTime: number = 0;
+  public extraTimeLabel: string = 'Temps extra';
   public imageUrl: string;
   public imageData: string;
   public tip: string;
 
   public get image(): string {
-    return this.imageData || this.imageUrl || 'assets/images/assiette.jpg';
+    return this.imageUrl || 'assets/images/assiette.jpg';
   }
 
   constructor(data?) {
@@ -29,21 +30,22 @@ export class Recipe {
       this.prepTime = data.prepTime;
       this.cookTime = data.cookTime;
       this.extraTime = data.extraTime;
+      this.extraTimeLabel = data.extraTimeLabel || 'Temps extra';
       this.imageUrl = data.imageUrl;
       this.imageData = data.imageData;
       this.tip = data.tip;
     }
   }
 
-  static sanitize(recipe: Recipe) {
-    recipe.name = StringUtils.escapeString(recipe.name);
-    recipe.ingredients = StringUtils.escapeString(recipe.ingredients);
-    recipe.preparation = StringUtils.escapeString(recipe.preparation);
-    recipe.tip = StringUtils.escapeString(recipe.tip);
-    if (recipe.extraTime) {
-      recipe.extraTime.name = StringUtils.escapeString(recipe.extraTime.name);
-    }
-  }
+  // static sanitize(recipe: Recipe) {
+  //   recipe.name = StringUtils.escapeString(recipe.name);
+  //   recipe.ingredients = StringUtils.escapeString(recipe.ingredients);
+  //   recipe.preparation = StringUtils.escapeString(recipe.preparation);
+  //   recipe.tip = StringUtils.escapeString(recipe.tip);
+  //   if (recipe.extraTime) {
+  //     recipe.extraTime.name = StringUtils.escapeString(recipe.extraTime.name);
+  //   }
+  // }
 }
 
 // export interface Recipe {

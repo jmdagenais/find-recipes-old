@@ -5,6 +5,7 @@ import {Recipe} from '../recipe.model';
 import {Subject, Subscription} from 'rxjs';
 import {RecipeService} from '../shared/recipe.service';
 import {takeUntil} from 'rxjs/internal/operators';
+import { AuthService } from '../auth/auth.service';
 
 @Component({
   selector: 'app-recipe-list',
@@ -22,7 +23,9 @@ export class RecipeListComponent implements OnInit, OnDestroy {
   tagsSubscription: Subscription;
   recipeSubscription: Subscription;
 
-  constructor(private recipeService: RecipeService, private httpClient: HttpClient) { }
+  constructor(
+    private recipeService: RecipeService, 
+    private authService: AuthService) { }
 
   ngOnInit() {
     // this.tagsSubscription = this.httpClient.get<string[]>('/api/tags')
@@ -79,6 +82,10 @@ export class RecipeListComponent implements OnInit, OnDestroy {
       this.selectedTags.push(tag);
       this.getRecipesByTag();
     }
+  }
+
+  isAuthenticated() {
+    return this.authService.isAuthenticated;
   }
 
   ngOnDestroy() {
