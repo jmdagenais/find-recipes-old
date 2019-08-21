@@ -2,9 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {Route, RouterModule} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HttpClient} from '@angular/common/http';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ConfirmationService} from 'primeng/api';
+import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { AddRecipeComponent } from './add-recipe/add-recipe.component';
@@ -27,6 +29,10 @@ const routes: Route[] = [
   {path: 'admin', component: AdminComponent}
 ];
 
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +50,13 @@ const routes: Route[] = [
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot(routes),
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: HttpLoaderFactory,
+          deps: [HttpClient]
+      }
+  }),
     PrimeNgModule,
   ],
   providers: [RecipeService, ConfirmationService],

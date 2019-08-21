@@ -1,4 +1,4 @@
-<span>Filtrer par catégorie</span>
+<span>{{'FILTER_BY_CATEGORY' | translate}}</span>
 <span class="ui-fluid">
   <p-autoComplete
     [(ngModel)]="selectedTags"
@@ -9,8 +9,7 @@
     [multiple]="true"></p-autoComplete>
   <br />
   <div class="d-flex justify-content-between">
-    <!--<h4>Recipes:</h4>-->
-    <a routerLink="/recipes/add" *ngIf="isAuthenticated()">Ajouter une recette</a>
+    <a routerLink="/recipes/add" *ngIf="isAuthenticated()">{{'ADD_RECIPE' | translate}}</a>
   </div>
   <ul class="list-group">
     <li class="list-group-item d-flex" *ngFor="let recipe of recipes">
@@ -20,8 +19,8 @@
       <div>
         <a class="recipe-name-link" [routerLink]="['/recipes', recipe._id]">{{recipe.name}}</a>
         <div class="d-none d-sm-flex time-indicator">
-          <span>préparation: {{recipe.prepTime | timeFormat}}</span>
-          <span *ngIf="recipe.cookTime > 0">cuisson: {{recipe.cookTime | timeFormat}}</span>
+          <span>{{'PREP_TIME' | translate}}: {{recipe.prepTime | timeFormat}}</span>
+          <span *ngIf="recipe.cookTime > 0">{{'COOK_TIME' | translate}}: {{recipe.cookTime | timeFormat}}</span>
           <span *ngIf="recipe.extraTime > 0">{{recipe.extraTimeLabel}}: {{recipe.extraTime | timeFormat}}</span>
         </div>
         <div class="d-flex tags-list">

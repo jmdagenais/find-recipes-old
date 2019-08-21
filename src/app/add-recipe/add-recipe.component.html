@@ -1,7 +1,7 @@
 <form #f="ngForm" (ngSubmit)="submit(f)">
   <div class="row">
     <div class="form-group col-md-12">
-      <label for="recipeName">Nom</label>
+      <label for="recipeName">{{'RECIPE_FORM.RECIPE_NAME' | translate}}</label>
       <input
         class="form-control"
         type="text"
@@ -11,7 +11,7 @@
         #name="ngModel"
         required
         pInputText>
-      <p-message severity="error" text="Ce champ est requis" [hidden]="name.valid || name.pristine"></p-message>
+      <p-message severity="error" text="'RECIPE_FORM.REQUIRED_FIELD' | translate" [hidden]="name.valid || name.pristine"></p-message>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
     </div>
     <div class="col-md-7 col-12">
       <div class="time-input">
-        <label for="nbPortions">Portions:</label>
+        <label for="nbPortions">{{'SERVINGS' | translate}}:</label>
         <input
           type="number"
           id="nbPortions"
@@ -39,7 +39,7 @@
           pInputText>
       </div>
       <div class="time-input">
-        <label>Temps de préparation:</label>
+        <label>{{'RECIPE_FORM.PREP_TIME' | translate}}:</label>
         <input
           type="number"
           id="prepTime"
@@ -50,7 +50,7 @@
         min.
       </div>
       <div class="time-input">
-        <label>Temps de cuisson:</label>
+        <label>{{'RECIPE_FORM.COOK_TIME' | translate}}:</label>
         <input
           type="number"
           id="cookTime"
@@ -59,7 +59,7 @@
           pInputText>
         min.
       </div>
-      <button type="button" *ngIf="!showExtraTime" (click)="showExtraTime = true" pButton label="+ de temps"></button>
+      <p-button type="button" *ngIf="!showExtraTime" (click)="showExtraTime = true" label="{{'RECIPE_FORM.EXTRA_TIME_BTN_LBL' | translate}}"></p-button>
       <div *ngIf="showExtraTime" class="time-input">
         <label 
           class="extraTimeLabel" 
@@ -88,7 +88,7 @@
   </div>
 
   <div class="form-group">
-    <label for="ingredients">Ingrédients:</label>
+    <label for="ingredients">{{'RECIPE_FORM.INGREDIENTS' | translate}}:</label>
     <textarea
       class="form-control"
       id="ingredients"
@@ -98,7 +98,7 @@
       pInputTextarea></textarea>
   </div>
   <div class="form-group">
-    <label for="preparation">Préparation:</label>
+    <label for="preparation">{{'RECIPE_FORM.PREPARATION' | translate}}:</label>
     <textarea
       class="form-control"
       id="preparation"
@@ -108,11 +108,11 @@
       pInputTextarea></textarea>
   </div>
   <div class="form-group">
-    <label for="tags">Choose tags</label>
+    <label for="tags">{{'RECIPE_FORM.CHOOSE_TAGS' | translate}}</label>
     <app-tag-selector id="tags" [(ngModel)]="recipe.tags" name="tags"></app-tag-selector>
   </div>
   <div class="form-group">
-    <button type="submit" pButton label="Ok"></button>
-    <button type="button" pButton label="Annuler" class="ui-button-secondary" (click)="done()"></button>
+    <p-button type="submit" label="Ok" class="ok-button"></p-button>
+    <p-button class="ui-button-secondary" (click)="done()" label="{{'CANCEL' | translate}}"></p-button>
   </div>
 </form>

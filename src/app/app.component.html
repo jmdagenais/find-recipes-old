@@ -1,6 +1,11 @@
 <div class="main-content">
   <div class="top-bar">
-    <a routerLink="/"><h1>Les recettes de JM</h1></a>
+    <a routerLink="/" class="top-bar__main-title"><h1>{{'MAIN_TITLE' | translate}}</h1></a>
+    <div class="top-bar__languages">
+      <a (click)="switchLang('en')" *ngIf="isFrench()" class="top-bar__language" href="javascript:;">English</a>
+      <a (click)="switchLang('fr')" *ngIf="isEnglish()" class="top-bar__language" href="javascript:;">Français</a>
+    </div>
+    
   </div>
 
   <div class="main-page">

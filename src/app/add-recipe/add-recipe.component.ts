@@ -70,7 +70,6 @@ export class AddRecipeComponent implements OnInit, OnDestroy {
     if (event.keyCode === 13) {
       event.preventDefault();
       this.extraTimeLabelEditing = false;
-      console.log('wazaaa!')
     }
   }
 
